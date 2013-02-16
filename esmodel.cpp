@@ -39,7 +39,8 @@ void run_estimation( const string & video ){
         
         motion.reset();
         motion.optimize(from, to);
-        cout << motion.transform.get_matrix() << "\n" << motion.appearance << "\n" << motion.result << endl;
+        cout << motion.transform.get_matrix()[0] << motion.transform.get_matrix()[1] << motion.transform.get_matrix()[2] << " ";
+        cout << motion.appearance << " " << motion.result << endl;
         
         from = to;
     }
