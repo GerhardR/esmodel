@@ -8,6 +8,12 @@ Build instructions
 
 esmodel only requires a working libcvd and TooN installation. Any input libraries linked into libcvd can be used to read files. Typically, these are libpng, libjpeg and more. To support videos, libcvd should be compiled with ffmpeg support.
 
+Then use CMake to build esmodel. Search path for libcvd should be provided through CMake variables, for example CMAKE_PREFIX_PATH
+
+http://www.edwardrosten.com/cvd/
+
+http://www.edwardrosten.com/cvd/toon.html
+
 Options
 -------
 
