@@ -18,10 +18,12 @@ minimal example:
     esmodel file://test.mp4
 
 other possible inputs:
+
     files:[on_end=unset_pending]//*png      all files in the current directory with ending png
     file://../../data/test.mp4              video file in another directory
 
 Some parameters can be set on the command line
+
     m   [3,4,6,8]   degrees of freedom used for the homography,
                     3 is 2D translation + rotation
                     4 is uniform scale, rotation, 2D translation
@@ -37,6 +39,7 @@ Some parameters can be set on the command line
     p   [0,1]       flag to parameterize around the center of the image (1) or not (0)
 
 This works as
+    
     esmodel [-option value []] input
 
 Output
