@@ -15,6 +15,7 @@ int appearance_type = 0;
 int max_iterations = 40;
 double min_delta = 1e-5;
 double max_RMSE = 1e-2;
+int use_prefix = 0;
 
 template <typename MODEL, typename APPEARANCE>
 void run_estimation( const string & video ){
@@ -22,7 +23,9 @@ void run_estimation( const string & video ){
     motion.max_iterations = max_iterations;
     motion.min_delta = min_delta;
     motion.max_RMSE = max_RMSE;
-    
+
+    TooN::Matrix<3> prefix = TooN::Identity;
+
     VideoBuffer<byte> * source = open_video_source<byte>( video );
     VideoFrame<byte> * frame;
     
@@ -31,17 +34,28 @@ void run_estimation( const string & video ){
     frame = source->get_frame();
     from.copy_from(*frame);
     source->put_frame(frame);
+
+    if(use_prefix){
+        prefix(0,2) = -from.size().x/2;
+        prefix(1,2) = -from.size().y/2;
+    }
     
+    cout << "H1 H2 H3 H4 H5 H6 H7 H8 H9 " << "err^2 pixels RMSE delta iterations [appearance]\n";
+
     while(source->frame_pending()){
         frame = source->get_frame();
         to.copy_from(*frame);
         source->put_frame(frame);
         
         motion.reset();
+        motion.transform.set_prefix(prefix);
         motion.optimize(from, to);
-        cout << motion.transform.get_matrix()[0] << motion.transform.get_matrix()[1] << motion.transform.get_matrix()[2] << " ";
-        cout << motion.appearance << " " << motion.result << endl;
-        
+        cout << motion.transform.get_matrix()[0] << motion.transform.get_matrix()[1] << motion.transform.get_matrix()[2];
+        cout << motion.result;
+        if(appearance_type == 1)
+            cout << motion.appearance;
+        cout << endl;
+
         from = to;
     }
 }
@@ -53,6 +67,7 @@ int main(int argc, char ** argv ){
     options::make(max_iterations,"i");
     options::make(min_delta, "d");
     options::make(max_RMSE, "r");
+    options::make(use_prefix, "p");
 
     const int filearg = options::parse(argc, argv);
 
