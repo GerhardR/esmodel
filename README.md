@@ -54,7 +54,7 @@ Output
 The output of the program is simple data in space separated columns. The first line is a header describing the
 individual columns. Here is a short explanation of the columns:
 
-    H1 - H9 :  the 3x3 homography in row major form, mapping pixels from the following frame to the current frame
+    H1 - H9 :  the 3x3 homography in row major form, mapping pixels from the current frame to the following frame
     err^2   :  the total squared error after the optimization
     pixels  :  number of valid pixels after the optimization
     RMSE    :  RMSE error
