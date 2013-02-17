@@ -57,9 +57,11 @@ int main(int argc, char ** argv ){
     const int filearg = options::parse(argc, argv);
 
     if(argc < 2 || filearg == argc){
-        cout << "usage: " << argv[0] << " [options] inputfiles\n";
+        cout << "usage: " << argv[0] << " [options] input\n";
         options::print();
-        cout << endl;
+        cout << "examples:\n"
+             << argv[0] << " files:[on_end=unset_pending]//*png\t\t all png files in the current directory\n";
+        cout << argv[0] << " file://video.mp4                  \t\t a video file\n";
         return 1;
     }
     
