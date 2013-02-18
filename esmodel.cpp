@@ -36,8 +36,10 @@ void run_estimation( const string & video ){
     source->put_frame(frame);
 
     if(use_prefix){
-        prefix(0,2) = -from.size().x/2;
-        prefix(1,2) = -from.size().y/2;
+        prefix(0,0) = 2.0 / from.size().x;
+        prefix(1,1) = 2.0 / from.size().x;
+        prefix(0,2) = -1;
+        prefix(1,2) = double(from.size().y) / double(from.size().x);
     }
     
     cout << "H1 H2 H3 H4 H5 H6 H7 H8 H9 " << "err^2 pixels RMSE delta iterations [appearance]\n";
